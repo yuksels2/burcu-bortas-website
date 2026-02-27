@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hizmetler — Dyt. Burcu Bortaş</title>
+  <meta name="description" content="Diyetisyen Burcu Bortaş'ın sunduğu bireysel beslenme danışmanlığı, sporcu beslenmesi, kilo yönetimi ve daha fazla hizmet.">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ─── HİZMETLER SAYFASI EK STİLLER ─── */
+
+    /* Hero özel arka plan */
+    .hizmetler-hero {
+      padding: 10rem 6rem 5rem;
+      background: linear-gradient(160deg, var(--green-pale) 60%, var(--cream-dark) 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hizmetler-hero::before {
+      content: '🌿';
+      position: absolute;
+      left: 4rem; top: 50%;
+      transform: translateY(-50%);
+      font-size: 10rem;
+      opacity: 0.07;
+    }
+    .hizmetler-hero::after {
+      content: '🌿';
+      position: absolute;
+      right: 4rem; top: 50%;
+      transform: translateY(-50%) scaleX(-1);
+      font-size: 10rem;
+      opacity: 0.07;
+    }
+
+    /* ─── ANA HİZMETLER GRID ─── */
+    .hizmetler-main {
+      padding: 6rem 6rem 4rem;
+      background: var(--cream-light);
+    }
+    .hizmetler-intro {
+      max-width: 560px;
+      margin-bottom: 4rem;
+    }
+    .hizmetler-intro p {
+      margin-top: 1rem;
+      color: var(--text-mid);
+      font-size: 1rem;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+    .hizmetler-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    /* Büyük hizmet kartı */
+    .hizmet-card {
+      background: var(--cream);
+      border-radius: 2rem;
+      padding: 2.8rem;
+      border: 1px solid rgba(58,90,64,0.07);
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .hizmet-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(to right, var(--green-light), var(--green-mid));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s;
+    }
+    .hizmet-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 48px rgba(58,90,64,0.1);
+    }
+    .hizmet-card:hover::after { transform: scaleX(1); }
+
+    .hizmet-card.featured {
+      background: var(--green-deep);
+      grid-column: span 2;
+      flex-direction: row;
+      align-items: center;
+      gap: 4rem;
+    }
+    .hizmet-card.featured::after {
+      background: linear-gradient(to right, var(--orange), var(--orange-light));
+    }
+    .hizmet-card.featured .hizmet-title { color: var(--cream); }
+    .hizmet-card.featured .hizmet-desc { color: rgba(245,239,224,0.7); }
+    .hizmet-card.featured .hizmet-num { color: rgba(255,255,255,0.06); }
+    .hizmet-card.featured .hizmet-icon-wrap { background: rgba(255,255,255,0.08); }
+    .hizmet-card.featured .hizmet-tag { color: var(--orange-light); border-color: rgba(232,149,106,0.35); }
+    .hizmet-card.featured .hizmet-features li { color: rgba(245,239,224,0.65); }
+    .hizmet-card.featured .hizmet-features li::before { background: var(--orange-light); }
+    .hizmet-card.featured .hizmet-cta {
+      background: var(--orange);
+      color: white;
+    }
+    .hizmet-card.featured .hizmet-cta:hover { background: var(--orange-light); }
+
+    .hizmet-card-left { flex: 1; }
+    .hizmet-card-right {
+      flex: 0 0 280px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .hizmet-card-right .price-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--orange-light);
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+    .hizmet-card-right .price-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--cream);
+      font-weight: 700;
+    }
+    .hizmet-card-right .price-note {
+      font-size: 0.78rem;
+      color: rgba(245,239,224,0.45);
+      display: block;
+      margin-top: 0.3rem;
+      font-weight: 300;
+    }
+
+    .hizmet-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      font-weight: 700;
+      color: rgba(58,90,64,0.06);
+      position: absolute;
+      top: 1.5rem; right: 2rem;
+      line-height: 1;
+      user-select: none;
+    }
+    .hizmet-icon-wrap {
+      width: 58px; height: 58px;
+      background: var(--green-pale);
+      border-radius: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      flex-shrink: 0;
+    }
+    .hizmet-tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--orange);
+      border: 1px solid rgba(212,116,58,0.3);
+      padding: 0.2rem 0.7rem;
+      border-radius: 2rem;
+      margin-bottom: 0.2rem;
+    }
+    .hizmet-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.45rem;
+      color: var(--green-deep);
+      line-height: 1.3;
+    }
+    .hizmet-title em { font-style: italic; color: var(--green-mid); }
+    .hizmet-desc {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      line-height: 1.75;
+      font-weight: 300;
+    }
+    .hizmet-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .hizmet-features li {
+      font-size: 0.85rem;
+      color: var(--text-mid);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 300;
+    }
+    .hizmet-features li::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--green-light);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .hizmet-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: auto;
+      padding: 0.7rem 1.4rem;
+      background: var(--green-pale);
+      color: var(--green-deep);
+      border-radius: 2rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      font-weight: 500;
+      text-transform: uppercase;
+      transition: background 0.2s, transform 0.2s;
+      align-self: flex-start;
+    }
+    .hizmet-cta:hover { background: var(--green-light); transform: translateX(3px); }
+    .hizmet-cta::after { content: '→'; color: var(--orange); }
+
+    /* ─── NASIL ÇALIŞIR (süreç) ─── */
+    .surec-section {
+      padding: 6rem 6rem;
+      background: var(--cream);
+    }
+    .surec-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      margin-bottom: 4rem;
+    }
+    .surec-header p {
+      color: var(--text-mid);
+      line-height: 1.8;
+      font-weight: 300;
+      font-size: 1rem;
+    }
+    .surec-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      position: relative;
+    }
+    .surec-grid::before {
+      content: '';
+      position: absolute;
+      top: 28px; left: calc(12.5% + 0px);
+      right: calc(12.5% + 0px);
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--green-light), var(--green-light), transparent);
+    }
+    .surec-item {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    .surec-num {
+      width: 56px; height: 56px;
+      background: var(--cream-light);
+      border: 2px solid var(--green-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--green-deep);
+      position: relative;
+      z-index: 1;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .surec-item:hover .surec-num {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: white;
+    }
+    .surec-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--green-deep);
+      font-weight: 600;
+    }
+    .surec-desc {
+      font-size: 0.82rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* ─── PAKET / FİYAT ─── */
+    .paket-section {
+      padding: 6rem 6rem;
+      background: var(--green-deep);
+      position: relative;
+      overflow: hidden;
+    }
+    .paket-section::before {
+      content: '';
+      position: absolute;
+      top: -30%; left: -10%;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(168,191,154,0.12) 0%, transparent 70%);
+    }
+    .paket-section::after {
+      content: '';
+      position: absolute;
+      bottom: -20%; right: -5%;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(212,116,58,0.08) 0%, transparent 70%);
+    }
+    .paket-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .paket-header .section-title { color: var(--cream); }
+    .paket-header .section-title em { color: var(--green-light); }
+    .paket-header p {
+      color: rgba(245,239,224,0.6);
+      font-size: 0.95rem;
+      font-weight: 300;
+      margin-top: 0.8rem;
+      line-height: 1.7;
+    }
+    .paket-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+    .paket-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 1.8rem;
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      transition: transform 0.3s, background 0.3s;
+    }
+    .paket-card:hover { transform: translateY(-4px); background: rgba(255,255,255,0.08); }
+    .paket-card.popular {
+      background: var(--cream);
+      border-color: var(--cream);
+      transform: scale(1.03);
+    }
+    .paket-card.popular:hover { transform: scale(1.03) translateY(-4px); }
+    .paket-card.popular .paket-name { color: var(--green-deep); }
+    .paket-card.popular .paket-price { color: var(--green-deep); }
+    .paket-card.popular .paket-period { color: var(--text-mid); }
+    .paket-card.popular .paket-desc { color: var(--text-mid); }
+    .paket-card.popular .paket-feature { color: var(--text-mid); }
+    .paket-card.popular .paket-feature::before { background: var(--green-mid); }
+    .paket-card.popular .paket-btn {
+      background: var(--green-deep);
+      color: var(--cream);
+    }
+    .paket-card.popular .paket-btn:hover { background: var(--green-mid); }
+    .popular-badge {
+      display: inline-block;
+      background: var(--orange);
+      color: white;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.8rem;
+      border-radius: 2rem;
+      font-weight: 500;
+      align-self: flex-start;
+    }
+    .paket-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--cream);
+      font-weight: 600;
+    }
+    .paket-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1;
+    }
+    .paket-period {
+      font-size: 0.8rem;
+      color: rgba(245,239,224,0.45);
+      font-weight: 300;
+      display: block;
+      margin-top: 0.3rem;
+    }
+    .paket-desc {
+      font-size: 0.85rem;
+      color: rgba(245,239,224,0.55);
+      line-height: 1.6;
+      font-weight: 300;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .paket-card.popular .paket-desc { border-color: rgba(58,90,64,0.12); }
+    .paket-features-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      flex: 1;
+    }
+    .paket-feature {
+      font-size: 0.83rem;
+      color: rgba(245,239,224,0.6);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 300;
+    }
+    .paket-feature::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--green-light);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .paket-btn {
+      display: block;
+      text-align: center;
+      padding: 0.85rem;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--cream);
+      border-radius: 2rem;
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: background 0.2s, transform 0.2s;
+      margin-top: auto;
+    }
+    .paket-btn:hover { background: rgba(255,255,255,0.15); transform: translateY(-1px); }
+    .paket-note {
+      text-align: center;
+      margin-top: 2.5rem;
+      font-size: 0.82rem;
+      color: rgba(245,239,224,0.35);
+      font-weight: 300;
+      position: relative;
+      z-index: 1;
+    }
+    .paket-note a { color: var(--orange-light); text-decoration: none; }
+    .paket-note a:hover { text-decoration: underline; }
+
+    /* ─── SSS ─── */
+    .sss-section {
+      padding: 6rem 6rem;
+      background: var(--cream-light);
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 6rem;
+      align-items: start;
+    }
+    .sss-sticky {
+      position: sticky;
+      top: 100px;
+    }
+    .sss-sticky p {
+      color: var(--text-mid);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      font-weight: 300;
+      margin-top: 1rem;
+    }
+    .sss-list { display: flex; flex-direction: column; gap: 0; }
+    .sss-item {
+      border-bottom: 1px solid rgba(58,90,64,0.1);
+    }
+    .sss-item:first-child { border-top: 1px solid rgba(58,90,64,0.1); }
+    .sss-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 1.4rem 0;
+      text-align: left;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--green-deep);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      transition: color 0.2s;
+    }
+    .sss-question:hover { color: var(--green-mid); }
+    .sss-icon {
+      width: 28px; height: 28px;
+      background: var(--green-pale);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: var(--green-deep);
+      flex-shrink: 0;
+      transition: background 0.2s, transform 0.3s;
+      line-height: 1;
+    }
+    .sss-item.open .sss-icon {
+      background: var(--orange);
+      color: white;
+      transform: rotate(45deg);
+    }
+    .sss-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s;
+    }
+    .sss-item.open .sss-answer { max-height: 200px; }
+    .sss-answer p {
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      line-height: 1.75;
+      font-weight: 300;
+      padding-bottom: 1.2rem;
+    }
+
+    /* ─── MOBİL ─── */
+    @media (max-width: 900px) {
+      .hizmetler-hero { padding: 8rem 1.5rem 3rem; }
+      .hizmetler-hero::before, .hizmetler-hero::after { display: none; }
+      .hizmetler-main { padding: 4rem 1.5rem; }
+      .hizmetler-grid { grid-template-columns: 1fr; }
+      .hizmet-card.featured { grid-column: span 1; flex-direction: column; gap: 2rem; }
+      .hizmet-card-right { flex: unset; }
+      .surec-section { padding: 4rem 1.5rem; }
+      .surec-header { grid-template-columns: 1fr; gap: 1.5rem; }
+      .surec-grid { grid-template-columns: repeat(2, 1fr); }
+      .surec-grid::before { display: none; }
+      .paket-section { padding: 4rem 1.5rem; }
+      .paket-grid { grid-template-columns: 1fr; }
+      .paket-card.popular { transform: none; }
+      .sss-section { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 3rem; }
+      .sss-sticky { position: static; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    Burcu Bortaş
+    <span>Uzman Diyetisyen</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="hakkimda.html">Hakkımda</a></li>
+    <li><a href="hizmetler.html">Hizmetler</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="iletisim.html">İletişim</a></li>
+    <li><a href="iletisim.html" class="nav-cta">Randevu Al</a></li>
+  </ul>
+  <div class="nav-hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hizmetler-hero">
+  <span class="section-tag">Hizmetler</span>
+  <h1 class="page-hero-title">Size özel <em>beslenme</em><br>programları</h1>
+  <p class="page-hero-desc">Bireysel ihtiyaçlarınızı, yaşam tarzınızı ve hedeflerinizi merkeze alarak tasarlanan bilimsel beslenme danışmanlığı.</p>
+</section>
+
+<!-- ANA HİZMETLER -->
+<section class="hizmetler-main">
+  <div class="hizmetler-intro reveal">
+    <span class="section-tag">Ne sunuyorum?</span>
+    <h2 class="section-title">Her danışan <em>benzersizdir</em></h2>
+    <p>Şablon diyetler değil, sizi tanıyarak oluşturulan programlar. İlk görüşmeden itibaren sizin hikayenizi, alışkanlıklarınızı ve hedeflerinizi dinleyerek yola çıkıyoruz.</p>
+  </div>
+
+  <div class="hizmetler-grid">
+
+    <!-- Öne çıkan hizmet -->
+    <div class="hizmet-card featured reveal">
+      <div class="hizmet-card-left">
+        <span class="hizmet-tag">En Çok Tercih Edilen</span>
+        <div class="hizmet-icon-wrap" style="margin-top:0.8rem;">🥗</div>
+        <h3 class="hizmet-title" style="margin-top:1rem;">Bireysel Beslenme <em>Danışmanlığı</em></h3>
+        <p class="hizmet-desc" style="margin-top:0.6rem;">
+          Detaylı sağlık anamnezi, vücut kompozisyon analizi ve metabolik ölçümlerle başlayan; haftalık takip görüşmeleriyle süren kapsamlı beslenme danışmanlığı programı.
+        </p>
+        <ul class="hizmet-features" style="margin-top:1rem;">
+          <li>İlk seans: 60 dakika detaylı değerlendirme</li>
+          <li>Kişiselleştirilmiş beslenme programı</li>
+          <li>Haftalık takip görüşmeleri</li>
+          <li>7/24 WhatsApp destek hattı</li>
+          <li>Kan tahlili yorumlama</li>
+        </ul>
+        <a href="iletisim.html" class="hizmet-cta" style="margin-top:1.5rem;">Randevu Al</a>
+      </div>
+      <div class="hizmet-card-right">
+        <span class="price-label">Aylık program</span>
+        <span class="price-value">Fiyat için<br>iletişime geçin</span>
+        <span class="price-note">İlk görüşme ücretsizdir</span>
+        <div style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid rgba(255,255,255,0.1);">
+          <p style="font-size:0.75rem; color:rgba(245,239,224,0.4); font-weight:300; line-height:1.6;">Online ve yüz yüze seans seçeneği mevcuttur.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sporcu Beslenmesi -->
+    <div class="hizmet-card reveal">
+      <span class="hizmet-num">02</span>
+      <div class="hizmet-icon-wrap">⚡</div>
+      <span class="hizmet-tag">Spor & Performans</span>
+      <h3 class="hizmet-title">Sporcu <em>Beslenmesi</em></h3>
+      <p class="hizmet-desc">Performansınızı artırmak, toparlanma sürecinizi hızlandırmak ve kas gelişimini desteklemek için bilimsel tabanlı spor beslenmesi planları.</p>
+      <ul class="hizmet-features">
+        <li>Antrenman öncesi/sonrası beslenme</li>
+        <li>Yarışma dönemi özel program</li>
+        <li>Supleman değerlendirmesi</li>
+        <li>Vücut kompozisyon takibi</li>
+      </ul>
+      <a href="iletisim.html" class="hizmet-cta">Bilgi Al</a>
+    </div>
+
+    <!-- Kilo Yönetimi -->
+    <div class="hizmet-card reveal">
+      <span class="hizmet-num">03</span>
+      <div class="hizmet-icon-wrap">🧘</div>
+      <span class="hizmet-tag">Kalıcı Değişim</span>
+      <h3 class="hizmet-title">Sağlıklı Kilo <em>Yönetimi</em></h3>
+      <p class="hizmet-desc">Hızlı kilo kaybı değil, sürdürülebilir ve kalıcı sonuçlar. Davranışsal beslenme yaklaşımıyla hem bedeninizi hem de yemekle ilişkinizi dönüştürüyoruz.</p>
+      <ul class="hizmet-features">
+        <li>Metabolizma analizi</li>
+        <li>Yeme davranışı koçluğu</li>
+        <li>Aylık vücut ölçüm takibi</li>
+        <li>Diyet sonrası stabilizasyon</li>
+      </ul>
+      <a href="iletisim.html" class="hizmet-cta">Bilgi Al</a>
+    </div>
+
+    <!-- Çocuk Beslenmesi -->
+    <div class="hizmet-card reveal">
+      <span class="hizmet-num">04</span>
+      <div class="hizmet-icon-wrap">🌱</div>
+      <span class="hizmet-tag">0–18 Yaş</span>
+      <h3 class="hizmet-title">Çocuk & Ergen <em>Beslenmesi</em></h3>
+      <p class="hizmet-desc">Büyüme ve gelişim döneminde doğru beslenme alışkanlıklarının kazandırılması, besin seçiciliğinin aşılması ve okul çağı çocuklarına yönelik programlar.</p>
+      <ul class="hizmet-features">
+        <li>Büyüme ve gelişim takibi</li>
+        <li>Besin seçiciliği programı</li>
+        <li>Aile odaklı beslenme eğitimi</li>
+        <li>Okul çağı beslenme planı</li>
+      </ul>
+      <a href="iletisim.html" class="hizmet-cta">Bilgi Al</a>
+    </div>
+
+    <!-- Gebelik -->
+    <div class="hizmet-card reveal">
+      <span class="hizmet-num">05</span>
+      <div class="hizmet-icon-wrap">🤱</div>
+      <span class="hizmet-tag">Anne & Bebek</span>
+      <h3 class="hizmet-title">Gebelik & Emzirme <em>Beslenmesi</em></h3>
+      <p class="hizmet-desc">Hamilelik sürecinde annenin ve bebeğin sağlığını desteklemek için trimester bazlı beslenme programları. Doğum sonrası toparlanma ve emzirme dönemi desteği.</p>
+      <ul class="hizmet-features">
+        <li>Trimester bazlı beslenme planı</li>
+        <li>Bulantı yönetimi & besin seçimi</li>
+        <li>Doğum sonrası toparlanma</li>
+        <li>Emzirme dönemi desteği</li>
+      </ul>
+      <a href="iletisim.html" class="hizmet-cta">Bilgi Al</a>
+    </div>
+
+    <!-- Online Danışmanlık -->
+    <div class="hizmet-card reveal">
+      <span class="hizmet-num">06</span>
+      <div class="hizmet-icon-wrap">💻</div>
+      <span class="hizmet-tag">Her Yerden Erişim</span>
+      <h3 class="hizmet-title">Online <em>Danışmanlık</em></h3>
+      <p class="hizmet-desc">Nerede olursanız olun, video görüşme ve dijital araçlarla yüz yüze seans kalitesinde online beslenme danışmanlığı. Tüm hizmetler online olarak sunulmaktadır.</p>
+      <ul class="hizmet-features">
+        <li>Video görüşme ile seans</li>
+        <li>Dijital beslenme günlüğü</li>
+        <li>Uygulama üzerinden takip</li>
+        <li>Esnek seans saatleri</li>
+      </ul>
+      <a href="iletisim.html" class="hizmet-cta">Bilgi Al</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- SÜREÇ -->
+<section class="surec-section">
+  <div class="surec-header">
+    <div class="reveal">
+      <span class="section-tag">Nasıl Çalışıyoruz?</span>
+      <h2 class="section-title">Adım adım <em>yolculuğunuz</em></h2>
+    </div>
+    <p class="reveal">İlk iletişimden programın tamamlanmasına kadar her aşamada yanınızdayım. Süreç şeffaf, destekleyici ve tamamen size odaklı ilerler.</p>
+  </div>
+  <div class="surec-grid">
+    <div class="surec-item reveal">
+      <div class="surec-num">1</div>
+      <span class="surec-title">Ücretsiz Ön Görüşme</span>
+      <p class="surec-desc">15 dakikalık keşif görüşmesiyle hedeflerinizi ve beklentilerinizi dinliyorum.</p>
+    </div>
+    <div class="surec-item reveal">
+      <div class="surec-num">2</div>
+      <span class="surec-title">Detaylı Değerlendirme</span>
+      <p class="surec-desc">Sağlık geçmişi, yaşam tarzı ve besinsel alışkanlıklarınızın kapsamlı analizi.</p>
+    </div>
+    <div class="surec-item reveal">
+      <div class="surec-num">3</div>
+      <span class="surec-title">Kişisel Program</span>
+      <p class="surec-desc">Size özel, uygulanabilir ve sürdürülebilir beslenme planının hazırlanması.</p>
+    </div>
+    <div class="surec-item reveal">
+      <div class="surec-num">4</div>
+      <span class="surec-title">Takip & Destek</span>
+      <p class="surec-desc">Düzenli görüşmeler ve anlık destek ile programınızın optimize edilmesi.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PAKETLER -->
+<section class="paket-section">
+  <div class="paket-header reveal">
+    <span class="section-tag" style="color:var(--orange-light);">Danışmanlık Paketleri</span>
+    <h2 class="section-title">Size uygun <em>paketi seçin</em></h2>
+    <p>Tüm paketler kişisel değerlendirme sonrası özelleştirilir. Fiyat bilgisi için iletişime geçin.</p>
+  </div>
+  <div class="paket-grid">
+
+    <div class="paket-card reveal">
+      <span class="paket-name">Başlangıç</span>
+      <div>
+        <span class="paket-price">1 Ay</span>
+        <span class="paket-period">Temel program</span>
+      </div>
+      <p class="paket-desc">Beslenme alışkanlıklarını düzenlemek ve ilk adımı atmak isteyenler için.</p>
+      <ul class="paket-features-list">
+        <li class="paket-feature">İlk değerlendirme seansı</li>
+        <li class="paket-feature">Kişisel beslenme programı</li>
+        <li class="paket-feature">2 takip görüşmesi</li>
+        <li class="paket-feature">WhatsApp desteği</li>
+        <li class="paket-feature">Beslenme rehberi</li>
+      </ul>
+      <a href="iletisim.html" class="paket-btn">Randevu Al</a>
+    </div>
+
+    <div class="paket-card popular reveal">
+      <span class="popular-badge">En Popüler</span>
+      <span class="paket-name">Dönüşüm</span>
+      <div>
+        <span class="paket-price">3 Ay</span>
+        <span class="paket-period">Kapsamlı program</span>
+      </div>
+      <p class="paket-desc">Kalıcı alışkanlıklar geliştirmek ve gerçek bir dönüşüm yaşamak isteyenler için.</p>
+      <ul class="paket-features-list">
+        <li class="paket-feature">Detaylı ilk değerlendirme</li>
+        <li class="paket-feature">Aylık program güncellemesi</li>
+        <li class="paket-feature">8 takip görüşmesi</li>
+        <li class="paket-feature">Öncelikli WhatsApp desteği</li>
+        <li class="paket-feature">Vücut ölçüm takibi</li>
+        <li class="paket-feature">Tarif & yemek planlaması</li>
+      </ul>
+      <a href="iletisim.html" class="paket-btn">Randevu Al</a>
+    </div>
+
+    <div class="paket-card reveal">
+      <span class="paket-name">Premium</span>
+      <div>
+        <span class="paket-price">6 Ay</span>
+        <span class="paket-period">Tam destek programı</span>
+      </div>
+      <p class="paket-desc">Maksimum destek ve takiple köklü bir yaşam değişimi hedefleyenler için.</p>
+      <ul class="paket-features-list">
+        <li class="paket-feature">Kapsamlı sağlık analizi</li>
+        <li class="paket-feature">Haftalık program revizyonu</li>
+        <li class="paket-feature">Sınırsız takip görüşmesi</li>
+        <li class="paket-feature">7/24 öncelikli destek</li>
+        <li class="paket-feature">Kan tahlili yorumlama</li>
+        <li class="paket-feature">Restoran & dışarıda yeme rehberi</li>
+        <li class="paket-feature">Aile beslenme danışmanlığı</li>
+      </ul>
+      <a href="iletisim.html" class="paket-btn">Randevu Al</a>
+    </div>
+
+  </div>
+  <p class="paket-note">Tüm paketler için önce <a href="iletisim.html">ücretsiz ön görüşme</a> yapılmaktadır. Fiyatlar görüşme sonrası belirlenir.</p>
+</section>
+
+<!-- SSS -->
+<section class="sss-section">
+  <div class="sss-sticky reveal">
+    <span class="section-tag">Sıkça Sorulan</span>
+    <h2 class="section-title">Aklınızdaki <em>sorular</em></h2>
+    <p>Başlamadan önce merak ettiklerinizi burada yanıtlamaya çalıştım. Farklı bir sorunuz varsa bana doğrudan yazabilirsiniz.</p>
+    <a href="iletisim.html" class="hizmet-cta" style="margin-top:2rem; background:var(--green-pale);">Soru Sor</a>
+  </div>
+  <div class="sss-list reveal">
+    <div class="sss-item">
+      <button class="sss-question">
+        İlk görüşme gerçekten ücretsiz mi?
+        <span class="sss-icon">+</span>
+      </button>
+      <div class="sss-answer">
+        <p>Evet, ilk tanışma görüşmesi (yaklaşık 15–20 dakika) tamamen ücretsizdir. Bu görüşmede hedeflerinizi dinler, size uygun program hakkında bilgi veririm. Herhangi bir bağlayıcılığı yoktur.</p>
+      </div>
+    </div>
+    <div class="sss-item">
+      <button class="sss-question">
+        Online seanslar yüz yüze kadar etkili mi?
+        <span class="sss-icon">+</span>
+      </button>
+      <div class="sss-answer">
+        <p>Araştırmalar online beslenme danışmanlığının yüz yüze kadar etkili olduğunu göstermektedir. Video görüşme, dijital takip araçları ve anlık mesajlaşmayla kesintisiz bir destek sunmaktayım.</p>
+      </div>
+    </div>
+    <div class="sss-item">
+      <button class="sss-question">
+        Programı başladıktan sonra değiştirebilir miyim?
+        <span class="sss-icon">+</span>
+      </button>
+      <div class="sss-answer">
+        <p>Kesinlikle. Beslenme programları sabit değildir; yaşam koşullarınıza, ilerleyişinize ve geri bildirimlerinize göre düzenli olarak güncellenir. Esneklik, başarının temel koşullarından biridir.</p>
+      </div>
+    </div>
+    <div class="sss-item">
+      <button class="sss-question">
+        Belirli bir diyet türüne (vegan, glutensiz vb.) uygun program yapılıyor mu?
+        <span class="sss-icon">+</span>
+      </button>
+      <div class="sss-answer">
+        <p>Evet. Vegan, vejetaryen, glutensiz, laktoz intoleransı veya dini/kültürel beslenme tercihlerinize göre programlar hazırlanabilir. Kısıtlamalarınızı ilk görüşmede paylaşmanız yeterli.</p>
+      </div>
+    </div>
+    <div class="sss-item">
+      <button class="sss-question">
+        Doktorum beni yönlendirdi, nasıl başlayabilirim?
+        <span class="sss-icon">+</span>
+      </button>
+      <div class="sss-answer">
+        <p>İletişim formunu doldurabilir veya doğrudan WhatsApp'tan yazabilirsiniz. Doktorunuzun önerilerini ve mevcut raporlarınızı ilk seansta birlikte değerlendiririz.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner reveal">
+  <div>
+    <span class="cta-label">Yeni bir başlangıç</span>
+    <h2 class="cta-title">Değişim için<br><em>en iyi zaman şimdi</em></h2>
+    <p class="cta-sub">İlk ücretsiz değerlendirme görüşmesi için bugün randevu alın.</p>
+  </div>
+  <div class="cta-actions">
+    <a href="iletisim.html" class="btn-cta-main">Randevu Al</a>
+    <a href="https://wa.me/90XXXXXXXXXX" class="btn-cta-sub">veya WhatsApp'tan yaz →</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <a href="index.html" class="footer-logo">
+      Burcu Bortaş
+      <small>Uzman Diyetisyen</small>
+    </a>
+    <p class="footer-desc">Sağlığınızı bilim ve sevgiyle yönetmenize eşlik eden bütüncül beslenme danışmanlığı.</p>
+  </div>
+  <div>
+    <p class="footer-heading">Sayfalar</p>
+    <ul class="footer-links">
+      <li><a href="hakkimda.html">Hakkımda</a></li>
+      <li><a href="hizmetler.html">Hizmetler</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="iletisim.html">İletişim</a></li>
+    </ul>
+  </div>
+  <div>
+    <p class="footer-heading">İletişim</p>
+    <ul class="footer-links">
+      <li><a href="mailto:info@burcubortas.com">📧 info@burcubortas.com</a></li>
+      <li><a href="tel:+905xxxxxxxxx">📱 +90 (5xx) xxx xx xx</a></li>
+      <li><a href="#">📍 İstanbul, Türkiye</a></li>
+    </ul>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Dyt. Burcu Bortaş. Tüm hakları saklıdır.</p>
+    <div class="footer-social">
+      <a href="#" class="social-link">in</a>
+      <a href="#" class="social-link">ig</a>
+      <a href="#" class="social-link">yt</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  // SSS Accordion
+  document.querySelectorAll('.sss-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.sss-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.sss-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+</script>
+</body>
+</html>
