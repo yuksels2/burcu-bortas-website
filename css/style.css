@@ -38,15 +38,27 @@ nav {
   transition: padding 0.3s, box-shadow 0.3s;
 }
 .nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+}
+.nav-logo-img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  border-radius: 50%;
+}
+.nav-logo-text {
   font-family: 'Playfair Display', serif;
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--green-deep);
   letter-spacing: 0.02em;
   line-height: 1.2;
-  text-decoration: none;
 }
-.nav-logo span {
+.nav-logo-text span {
   display: block;
   font-size: 0.7rem;
   font-family: 'Jost', sans-serif;
@@ -997,3 +1009,4 @@ footer {
 
   .section-title { font-size: 2rem; }
 }
+
