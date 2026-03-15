@@ -1,3 +1,17 @@
+// --- GOOGLE ANALYTICS ---
+(function() {
+  const gtagScript = document.createElement('script');
+  gtagScript.async = true;
+  gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-NP0ZKD4HEG';
+  document.head.appendChild(gtagScript);
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ window.dataLayer.push(arguments); }
+  window.gtag = gtag;
+  gtag('js', new Date());
+  gtag('config', 'G-NP0ZKD4HEG');
+})();
+
 (function () {
   const head = document.head;
 
