@@ -232,6 +232,9 @@
       gap: 1.5rem;
       position: relative;
     }
+    .surec-grid-5 {
+      grid-template-columns: repeat(5, 1fr);
+    }
     .surec-grid::before {
       content: '';
       position: absolute;
@@ -458,6 +461,8 @@
       .surec-section { padding: 4rem 1.5rem; }
       .surec-header { grid-template-columns: 1fr; gap: 1.5rem; }
       .surec-grid { grid-template-columns: repeat(2, 1fr); }
+      .surec-grid-5 { grid-template-columns: repeat(1, 1fr); }
+      .surec-grid-5::before { display: none; }
       .surec-grid::before { display: none; }
       .paket-section { padding: 4rem 1.5rem; }
       .paket-grid { grid-template-columns: 1fr; }
@@ -611,7 +616,7 @@
     </div>
     <p class="reveal">İlk iletişimden programın tamamlanmasına kadar her aşamada yanınızdayım. Süreç şeffaf, destekleyici ve tamamen size odaklı ilerler.</p>
   </div>
-  <div class="surec-grid" style="grid-template-columns: repeat(5, 1fr);">
+  <div class="surec-grid surec-grid-5">
     <div class="surec-item reveal">
       <div class="surec-num">1</div>
       <span class="surec-title">Ön Görüşme</span>
