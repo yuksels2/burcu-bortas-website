@@ -20,11 +20,11 @@
     const keywords = document.createElement('meta');
     keywords.name = 'keywords';
     keywords.content = [
-      // Şehir bazlı
+      // City
       'ankara diyetisyen', 'çankaya diyetisyen', 'diyetisyen ankara',
       'diyetisyen çankaya', 'ankara beslenme uzmanı', 'çankaya beslenme danışmanı',
       'ankara online diyetisyen', 'online diyetisyen ankara',
-      // Hizmet bazlı
+      // Service
       'kilo verme ankara', 'kilo vermek için diyetisyen',
       'insülin direnci diyetisyen ankara', 'insülin direnci beslenme programı',
       'pcos diyetisyen ankara', 'polikistik over diyeti',
@@ -35,14 +35,14 @@
       'bağırsak sağlığı diyetisyen', 'ibs beslenme programı',
       'kolesterol diyeti ankara', 'hipertansiyon diyeti',
       'lipödem diyeti', 'metabolizma hızlandırma',
-      // Marka
+      // Brand
       'dyt burcu bortaş', 'burcu bortaş diyetisyen',
       'dytburcubortas', 'burcu bortaş ankara',
     ].join(', ');
     head.appendChild(keywords);
   }
 
-  // --- ORTAK META ---
+  // --- Shared Meta ---
   const metas = [
     { name: 'author', content: 'Dyt. Burcu Bortaş' },
     { name: 'robots', content: 'index, follow' },
