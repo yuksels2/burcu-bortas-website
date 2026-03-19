@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
   </footer>
   `;
 
-  // Mevcut footer varsa değiştir, yoksa body'nin sonuna ekle
+
   const existing = document.querySelector("footer");
   if (existing) {
     existing.outerHTML = footerHTML;
